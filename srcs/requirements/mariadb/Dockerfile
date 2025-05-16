@@ -13,13 +13,13 @@ RUN apt-get install -y mariadb-server netcat
 EXPOSE 3306
 
 # copy file from host to container
-COPY ./mdb-conf.sh /mdb-conf.sh
+COPY ./tools/mdb-conf.sh /tools/mdb-conf.sh
 
 # set permission to the file
-RUN chmod +x /mdb-conf.sh
+RUN chmod +x tools/mdb-conf.sh
 
 # define entrepoint command to run when the container starts
-ENTRYPOINT ["/bin/bash", "./mdb-conf.sh"]
+ENTRYPOINT ["/bin/bash", "./tools/mdb-conf.sh"]
 
 # command used by exec in bash script
 CMD ["mysqld_safe"]
