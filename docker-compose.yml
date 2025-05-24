@@ -6,11 +6,11 @@ services:
     mariadb:
         image: mariadb:user
         container_name: mariadb
-        build: ./mariadb
+        build: ./srcs/requirements/mariadb
         volumes:
-            -mariadb:/var/lib/mysql
+            - ${HOME}/data/mariadb:/var/lib/mysql
         env_file:
-            - .env
+            - ./srcs/.env
         networks:
             - inception
         restart: always
@@ -23,13 +23,13 @@ services:
     nginx:
         image: nginx:user
         container_name: nginx
-        build: ./nginx 
+        build: ./srcs/requirements/nginx 
         ports:
-            -"443:443"
+            - "443:443"
         depends_on:
             - wordpress
         volumes:
-            -wordpress:/var/www/wordpress
+            - ${HOME}/data/wordpress:/var/www/wordpress
         networks:
             - inception
         restart: always
@@ -37,12 +37,12 @@ services:
     wordpress:
         image: wordpress:user
         container_name: wordpress
-        build: ./wordpress
+        build: ./srcs/requirements/wordpress
         depends_on:
             mariadb:
                 condition: service_healthy
         volumes:
-            -wordpress:/var/www/wordpress
+            - ${HOME}/data/wordpress:/var/www/wordpress
         env_file:
             - .env
         networks:
@@ -55,14 +55,14 @@ volumes:
         name: mariadb
         driver: local
         driver_opts:
-            device: /home/data/mariadb
+            device: /home/tzi-qi/data/mariadb
             o: bind
             type: none
     wordpress:
         name: wordpress
         driver: local
         driver_opts:
-            device: /home/data/wordpress
+            device: /home/tzi-qi/data/wordpress
             o: bind
             type: none
 
