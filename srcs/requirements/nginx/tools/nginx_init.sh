@@ -7,4 +7,4 @@ openssl req -x509 -nodes -out /etc/nginx/ssl/inception.crt -keyout \
 echo "Done"
 
 #--------------Start Nginx--------------#
-exec "$@";
+nginx -g "daemon off;"

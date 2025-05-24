@@ -21,7 +21,7 @@ RUN chmod +x /tools/nginx_init.sh
 RUN mkdir -p /etc/nginx/ssl
 
 # set entrypoint to run the shell script
-ENTRYPOINT ["./tools/nginx_init.sh"]
+ENTRYPOINT ["/tools/nginx_init.sh"]
 
 # define the command to run when the container starts
 CMD ["nginx", "-g", "daemon off;"]
