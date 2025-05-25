@@ -20,6 +20,14 @@ down:
 build:
 	docker compose -f ./docker-compose.yml build
 
+# STOP THE CONTAINERS
+stop:
+	docker compose stop
+
+# START THE EXISTING CONTAINERS
+start:
+	docker compose start
+
 # CLEAN THE CONTAINERS
 clean: down
 	@docker system prune -af --volumes
@@ -29,4 +37,4 @@ clean: down
 # CLEAN AND START THE CONTAINERS 
 re: clean up
 
-.PHONY: up down clean 
+.PHONY: create_dir up down build stop start clean
