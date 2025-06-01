@@ -31,10 +31,13 @@ start:
 # CLEAN THE CONTAINERS
 clean: down
 	@docker system prune -af --volumes
-	@rm -rf "$(WP_DATA)" || true
-	@rm -rf "$(DB_DATA)" || true
+	@docker volume prune -f
+	@sudo rm -rf $(WP_DATA)
+	@sudo rm -rf $(DB_DATA)
+
+fclean: clean
 
 # CLEAN AND START THE CONTAINERS 
-re: clean up
+re: clean all
 
 .PHONY: create_dir up down build stop start clean
